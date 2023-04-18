@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Kasirkoo</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="produk">Produk</string>
+    <string name="kasbon">Kasbon</string>
+    <string name="pengaturan">Pengaturan</string>
+    <string name="other">Lainnya</string>
+    <string name="home">Beranda</string>
+    <string name="kas">Kas Toko</string>
+    <string name="pelanggan">Pelanggan</string>
+    <string name="pegawai">Pegawai</string>
+    <string name="bantuan">Bantuan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

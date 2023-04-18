@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuHome"
+        android:title="@string/home"
+        android:icon="@drawable/home"/>
+
+    <item
+        android:id="@+id/menuKasbon"
+        android:title="@string/kasbon"
+        android:icon="@drawable/kasbon"/>
+
+    <item
+        android:id="@+id/menuKasToko"
+        android:title="@string/kas"
+        android:icon="@drawable/kastoko"/>
+
+    <item
+        android:id="@+id/menuTransaksi"
+        android:title="@string/transaksi"
+        android:icon="@drawable/transaksi"/>
+
+    <item
+        android:id="@+id/menuProduk"
+        android:title="@string/produk"
+        android:icon="@drawable/produk"/>
+
+    <item
+        android:id="@+id/menuPelanggan"
+        android:title="@string/pelanggan"
+        android:icon="@drawable/pelanggan"/>
+
+    <item
+        android:id="@+id/menuPegawai"
+        android:title="@string/pegawai"
+        android:icon="@drawable/pegawai"/>
+
+    <item
+        android:id="@+id/menuPengaturan"
+        android:title="@string/pengaturan"
+        android:icon="@drawable/pengaturan"/>
+
+    <item
+        android:id="@+id/menuBantuan"
+        android:title="@string/bantuan"
+        android:icon="@drawable/bantuan"/>
+
+</menu>
