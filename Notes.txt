@@ -1,0 +1,9 @@
+1. Fix Tombol back terus terusan ngeback ke sebelumnya.
+2. Halaman produk ganti jadi ada dua button "List produk" sama "List kategori". Berarti yg skrg produk, ganti nama activity nya jadi "listProduct" (perhatikan semua yg pasti error karena beda penamaan activity)
+3. Bikin activity kategori. isinya recycler view mirip kaya activity produk.
+4. MyDatabaseHelper ganti nama jadi ProdukDatabase (karena isinya cuma produk doang)
+5. Copy ProdukDatabase, bikin databasehelper baru namanya KategoriDatabase -> bikin table baru namanya kategori
+6. Tabel kategori isinya cuma "id","category_title"
+7. Tabel produk skrg ada id kategori, jadi ada COLUMN_CATEGORY = "category_id".
+8. Di activity list produk, tambahin select option isinya kategori, value nya id dari kategori itu
+9. di activity_produk (yg skrg), textview id (yg angka gede di kiri) ganti sama index aja biar enak diliat
