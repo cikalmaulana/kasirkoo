@@ -13,25 +13,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kasirkoo.adapter.CustomAdapter;
+import com.example.kasirkoo.adapter.KategoriAdapter;
+import com.example.kasirkoo.databaseshelper.KategoriDatabaseHelper;
 import com.example.kasirkoo.databaseshelper.MyDatabaseHelper;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 
-public class ProdukListActivity extends AppCompatActivity {
+public class KategoriActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ExtendedFloatingActionButton add_button;
-    MyDatabaseHelper myDB;
-    ArrayList<String> product_id,product_title, product_price, product_stock, product_code;
-    CustomAdapter customAdapter;
+    KategoriDatabaseHelper myDB;
+    ArrayList<String> kategori_id,kategori_title;
+    KategoriAdapter kategoriAdapter;
     ImageView imageBack;
-    TextView no_product_textView;
+    TextView no_kategori_textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produk_list);
+        setContentView(R.layout.activity_kategori);
         setUp();
     }
 
@@ -39,11 +41,11 @@ public class ProdukListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         add_button = findViewById(R.id.add_button);
         imageBack = findViewById(R.id.imageBack);
-        no_product_textView = findViewById(R.id.no_product_textView);
+        no_kategori_textView = findViewById(R.id.no_kategori_textView);
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProdukListActivity.this, ProductActivity.class);
+                Intent intent = new Intent(KategoriActivity.this, ProductActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -51,24 +53,21 @@ public class ProdukListActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProdukListActivity.this, AddActivity.class);
+                Intent intent = new Intent(KategoriActivity.this, AddKategoriActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        myDB = new MyDatabaseHelper(ProdukListActivity.this);
-        product_id = new ArrayList<>();
-        product_title = new ArrayList<>();
-        product_price = new ArrayList<>();
-        product_stock = new ArrayList<>();
-        product_code = new ArrayList<>();
+        myDB = new KategoriDatabaseHelper(KategoriActivity.this);
+        kategori_id = new ArrayList<>();
+        kategori_title = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(ProdukListActivity.this,this, product_id,product_title,product_price,product_stock,product_code);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ProdukListActivity.this));
+        kategoriAdapter = new KategoriAdapter(KategoriActivity.this,this, kategori_id,kategori_title);
+        recyclerView.setAdapter(kategoriAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(KategoriActivity.this));
     }
 
     @Override
@@ -82,23 +81,20 @@ public class ProdukListActivity extends AppCompatActivity {
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
         if(cursor.getCount() == 0) {
-            no_product_textView.setVisibility(View.VISIBLE);
+            no_kategori_textView.setVisibility(View.VISIBLE);
         }
         else{
-            no_product_textView.setVisibility(View.GONE);
+            no_kategori_textView.setVisibility(View.GONE);
             while (cursor.moveToNext()){
-                product_id.add(cursor.getString(0));
-                product_title.add(cursor.getString(1));
-                product_price.add(cursor.getString(2));
-                product_stock.add(cursor.getString(3));
-                product_code.add(cursor.getString(4));
+                kategori_id.add(cursor.getString(0));
+                kategori_title.add(cursor.getString(1));
             }
         }
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ProdukListActivity.this, ProductActivity.class);
+        Intent intent = new Intent(KategoriActivity.this, ProductActivity.class);
         startActivity(intent);
         finish();
     }

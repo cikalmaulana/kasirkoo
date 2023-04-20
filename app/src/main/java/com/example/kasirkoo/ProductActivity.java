@@ -28,6 +28,15 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        list_kategori_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, KategoriActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

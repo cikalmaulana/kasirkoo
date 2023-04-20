@@ -5,12 +5,6 @@
     android:id="@+id/main"
     app:startDestination="@id/menuHome">
 
-<!--    <fragment-->
-<!--        android:id="@+id/menuProduk"-->
-<!--        android:name="com.example.kasirkoo.ProdukFragment"-->
-<!--        android:label="Produk"-->
-<!--        tools:layout="@layout/fragment_produk"/>-->
-
     <fragment
         android:id="@+id/menuTransaksi"
         android:name="com.example.kasirkoo.TransaksiFragment"
@@ -22,11 +16,7 @@
         android:name="com.example.kasirkoo.HomeFragment"
         android:label="Beranda"
         tools:layout="@layout/fragment_home" />
-<!--    <activity-->
-<!--        android:id="@+id/menuProduk"-->
-<!--        android:name="com.example.kasirkoo.ProdukListActivity"-->
-<!--        android:label="Produk"-->
-<!--        tools:layout="@layout/activity_produk_list" />-->
+
     <activity
         android:id="@+id/menuProduk"
         android:name="com.example.kasirkoo.ProductActivity"

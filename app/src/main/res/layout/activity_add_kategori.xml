@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddActivity"
+    android:padding="30sp">
+
+    <TextView
+        android:id="@+id/backTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kembali"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/product_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tambah Kategori"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Kategori"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/kategori_title_input"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/kategori_title_input"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="250dp"
+        android:ems="10"
+        android:hint="Nama Kategori"
+        android:inputType="textPersonName"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/produk_logo"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/add_kategori_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:text="Tambah Kategori"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/custom_button"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kategori_title_input" />
+</androidx.constraintlayout.widget.ConstraintLayout>

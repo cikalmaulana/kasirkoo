@@ -6,12 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.kasirkoo.databaseshelper.MyDatabaseHelper;
 
 public class UpdateProductActivity extends AppCompatActivity {
 
@@ -91,29 +96,55 @@ public class UpdateProductActivity extends AppCompatActivity {
             stock_input.setText(stock);
             code_input.setText(code);
         }else{
-            Toast.makeText(this, "No Data.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tidak ada data.", Toast.LENGTH_SHORT).show();
         }
     }
 
     void confirmDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + title + " ?");
-        builder.setMessage("Are you sure you want to delete " + title + " ?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        View alertCustomDialog = LayoutInflater.from(UpdateProductActivity.this).inflate(R.layout.custom_dialog,null);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setView(alertCustomDialog);
+        Button acceptBtn = (Button) alertCustomDialog.findViewById(R.id.delete_button);
+        Button noBtn = (Button) alertCustomDialog.findViewById(R.id.no_button);
+
+        final AlertDialog dialog = alertDialog.create();
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+
+        acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateProductActivity.this);
                 myDB.deleteOneRow(id);
                 finish();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
+            public void onClick(View v) {
+                dialog.cancel();
             }
         });
-        builder.create().show();
+
+//        builder.setTitle("Hapus " + title + " ?");
+//        builder.setMessage("Anda yakin menghapus " + title + " ?");
+//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateProductActivity.this);
+//                myDB.deleteOneRow(id);
+//                finish();
+//            }
+//        });
+//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        builder.show();
     }
 
     @Override
