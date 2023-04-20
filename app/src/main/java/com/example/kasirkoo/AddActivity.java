@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class AddActivity extends AppCompatActivity {
 
     EditText title_input, price_input, stock_input, code_input;
     Button add_button;
+    TextView backTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class AddActivity extends AppCompatActivity {
         stock_input = findViewById(R.id.stock_input);
         code_input = findViewById(R.id.code_input);
         add_button = findViewById(R.id.add_button);
+        backTextView = findViewById(R.id.backTextView);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,9 +37,25 @@ public class AddActivity extends AppCompatActivity {
                         code_input.getText().toString().trim()
                 );
 
-                Intent intent = new Intent(AddActivity.this, ProdukActivity.class);
+                Intent intent = new Intent(AddActivity.this, ProdukListActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
+        backTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddActivity.this, ProdukListActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddActivity.this, ProdukListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

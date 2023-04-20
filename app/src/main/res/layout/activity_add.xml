@@ -7,51 +7,122 @@
     tools:context=".AddActivity"
     android:padding="30sp">
 
+    <TextView
+        android:id="@+id/backTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kembali"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/product_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tambah Produk"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kode Produk"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/title_input"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/title_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="Nama Produk"
         android:inputType="textPersonName"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/produk_logo"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harga"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/price_input"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/price_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="43dp"
         android:ems="10"
         android:hint="Harga"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/harga_logo"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_input" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stok"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/stock_input"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/stock_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="43dp"
         android:ems="10"
         android:hint="Stok"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/stok_logo"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price_input" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kode Produk"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/code_input"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/code_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="43dp"
         android:ems="10"
         android:hint="Kode Produk"
-        android:inputType="textPersonName"
+        android:inputType="text"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/code_logo"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stock_input" />
@@ -59,11 +130,14 @@
     <Button
         android:id="@+id/add_button"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginTop="40dp"
-        android:text="Tambah"
+        android:text="Tambah Produk"
         android:textAllCaps="false"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/custom_button"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/code_input" />

@@ -12,16 +12,19 @@
         android:theme="@style/Theme.Kasirkoo"
         tools:targetApi="31">
         <activity
+            android:name=".ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateProductActivity"
             android:exported="false"
-            android:parentActivityName=".ProdukActivity" />
+            android:parentActivityName=".ProdukListActivity" />
         <activity
             android:name=".AddActivity"
             android:exported="false"
             android:label="Add Product"
-            android:parentActivityName=".ProdukActivity" />
+            android:parentActivityName=".ProdukListActivity" />
         <activity
-            android:name=".ProdukActivity"
+            android:name=".ProdukListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

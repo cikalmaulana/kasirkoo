@@ -18,7 +18,7 @@ public class UpdateProductActivity extends AppCompatActivity {
     EditText title_input, price_input, stock_input, code_input;
     Button update_button,delete_button;
     String id, title, price, stock, code;
-    TextView product_title_textView;
+    TextView product_title_textView,backTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         code_input = findViewById(R.id.code_input2);
         product_title_textView = findViewById(R.id.product_title_textView);
         delete_button = findViewById(R.id.delete_button);
+        backTextView = findViewById(R.id.backTextView);
 
         getAndSetIntentDatea();
 
@@ -51,14 +52,23 @@ public class UpdateProductActivity extends AppCompatActivity {
                 stock = stock_input.getText().toString().trim();
                 code = code_input.getText().toString().trim();
                 myDB.updateData(id,title,Integer.valueOf(price),Integer.valueOf(stock),code);
-                Intent intent = new Intent(UpdateProductActivity.this, ProdukActivity.class);
+                Intent intent = new Intent(UpdateProductActivity.this, ProdukListActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 confirmDialog();
+            }
+        });
+        backTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpdateProductActivity.this, ProdukListActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -104,5 +114,12 @@ public class UpdateProductActivity extends AppCompatActivity {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(UpdateProductActivity.this, ProdukListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

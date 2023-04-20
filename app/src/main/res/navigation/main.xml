@@ -22,9 +22,14 @@
         android:name="com.example.kasirkoo.HomeFragment"
         android:label="Beranda"
         tools:layout="@layout/fragment_home" />
+<!--    <activity-->
+<!--        android:id="@+id/menuProduk"-->
+<!--        android:name="com.example.kasirkoo.ProdukListActivity"-->
+<!--        android:label="Produk"-->
+<!--        tools:layout="@layout/activity_produk_list" />-->
     <activity
         android:id="@+id/menuProduk"
-        android:name="com.example.kasirkoo.ProdukActivity"
+        android:name="com.example.kasirkoo.ProductActivity"
         android:label="Produk"
-        tools:layout="@layout/activity_produk" />
+        tools:layout="@layout/activity_product" />
 </navigation>
