@@ -20,6 +20,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PRICE = "product_price";
     private static final String COLUMN_STOCK = "product_stock";
     private static final String COLUMN_CODE = "product_code";
+    private static final String COLUMN_IDKATEGORI = "product_id_kat";
+    private static final String COLUMN_GAMBAR = "product_gambar";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,7 +36,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_TITLE + " TEXT, " +
                         COLUMN_PRICE + " INTEGER, " +
                         COLUMN_STOCK + " INTEGER, " +
-                        COLUMN_CODE + " TEXT); ";
+                        COLUMN_CODE + " TEXT, " +
+                        COLUMN_IDKATEGORI + " INTEGER, " +
+                        COLUMN_GAMBAR + " BLOB); ";
         db.execSQL(query);
     }
 
@@ -44,7 +48,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addBook(String title, int price, int stock, String code){
+    public void addProduk(String title, int price, int stock, String code, int idkat, byte[]byteArray){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -52,12 +56,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_PRICE, price);
         cv.put(COLUMN_STOCK, stock);
         cv.put(COLUMN_CODE, code);
+        cv.put(COLUMN_IDKATEGORI, idkat);
+        cv.put(COLUMN_GAMBAR, byteArray);
 
         long result = db.insert(TABLE_NAME,null,cv);
         if(result == -1){
-            Toast.makeText(context, "Gagal menambahkan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Gagal menambahkan produk", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Sukses menambahkan!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sukses menambahkan produk!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -72,14 +78,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_PRICE + " INTEGER, " +
                     COLUMN_STOCK + " INTEGER, " +
-                    COLUMN_CODE + " TEXT); ";
+                    COLUMN_CODE + " TEXT, " +
+                    COLUMN_IDKATEGORI + " INTEGER, " +
+                    COLUMN_GAMBAR + " BLOB); ";
             db.execSQL(query2);
             cursor = db.rawQuery(query,null);
         }
         return cursor;
     }
 
-    public void updateData(String row_id, String title, int price, int stock, String code){
+    public void updateData(String row_id, String title, int price, int stock, String code, int idkat){
         System.out.println(title + " " + price + " " + stock + " "  +code);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -87,6 +95,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_PRICE, price);
         cv.put(COLUMN_STOCK, stock);
         cv.put(COLUMN_CODE, code);
+        cv.put(COLUMN_IDKATEGORI, idkat);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1) Toast.makeText(context, "Gagal update", Toast.LENGTH_LONG).show();

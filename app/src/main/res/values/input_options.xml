@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="input_options">
+        <item>Makanan</item>
+        <item>Minuman</item>
+        <item>Snack</item>
+        <item>Lainnya</item>
+    </string-array>
+</resources>

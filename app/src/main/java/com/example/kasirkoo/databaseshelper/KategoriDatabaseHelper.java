@@ -38,7 +38,7 @@ public class KategoriDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addBook(String title){
+    public void addKategori(String title){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -54,6 +54,21 @@ public class KategoriDatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            String query2 =  "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                    " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT); ";
+            db.execSQL(query2);
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
+    }
+
+    public Cursor readAllDataWhere(String id){
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + id ;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

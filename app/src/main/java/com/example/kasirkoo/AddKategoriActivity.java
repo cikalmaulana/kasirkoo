@@ -30,7 +30,7 @@ public class AddKategoriActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 KategoriDatabaseHelper myDB = new KategoriDatabaseHelper(AddKategoriActivity.this);
-                myDB.addBook(
+                myDB.addKategori(
                         title_input.getText().toString().trim()
                 );
 
