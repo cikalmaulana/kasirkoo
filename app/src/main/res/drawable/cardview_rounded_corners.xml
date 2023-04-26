@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="25dp" /> <!-- Set nilai radius yang diinginkan, misalnya 8dp -->
+    <corners android:radius="50dp" /> <!-- Set nilai radius yang diinginkan, misalnya 8dp -->
     <solid android:color="#FFFFFF" /> <!-- Set warna latar belakang CardView -->
 </shape>

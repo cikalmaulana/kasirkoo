@@ -6,50 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".ProdukListActivity">
 
-    <LinearLayout
-        android:id="@+id/layoutToolBar"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/layoutToolBar">
 
         <ImageView
             android:id="@+id/imageBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_back"
-            app:tint="@color/white">
-        </ImageView>
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
         <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="match_parent"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="List Kategori"
-            android:textColor="@color/white"
+            android:text="Kategori"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold">
+            android:textStyle="bold"/>
 
-        </TextView>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layoutToolBar"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -67,7 +62,8 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_anchor="@id/recyclerView" />
+        app:layout_anchor="@id/recyclerView"
+        android:textAllCaps="false"/>
 
     <TextView
         android:id="@+id/no_kategori_textView"

@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class ProductActivity extends AppCompatActivity {
 
-    Button list_product_button,list_kategori_button;
+    RelativeLayout list_product_button,list_kategori_button;
     ImageView imageBack;
 
     @Override
