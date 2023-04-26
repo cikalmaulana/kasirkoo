@@ -3,19 +3,31 @@ package com.example.kasirkoo;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +35,22 @@ import android.widget.Toast;
 import com.example.kasirkoo.databaseshelper.KategoriDatabaseHelper;
 import com.example.kasirkoo.databaseshelper.MyDatabaseHelper;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class UpdateProductActivity extends AppCompatActivity {
 
+    private static final int REQUEST_GALLERY = 1;
+    private static final int REQUEST_CAMERA = 2;
+    private static final int REQUEST_CAMERA_PERMISSION = 1;
+
     EditText title_input, price_input, stock_input, code_input;
-    Button update_button,delete_button;
-    String id, title, price, stock, code, kategori, selectedOption,selectedOptionId;
+    Button update_button,delete_button,addGambar_btn;
+    String id, title, price, stock, code, kategori, selectedOption, selectedOptionId;
+    byte[] image_bitmap;
     TextView product_title_textView,backTextView;
+    ImageView product_imageView;
+    Drawable produkimageDraable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +59,51 @@ public class UpdateProductActivity extends AppCompatActivity {
 
         ArrayList<String> inputOptions = new ArrayList<>();
 
+
         title_input = findViewById(R.id.title_input2);
         price_input = findViewById(R.id.price_input2);
         stock_input = findViewById(R.id.stock_input2);
         code_input = findViewById(R.id.code_input2);
+        addGambar_btn = findViewById(R.id.addGambar_btn);
+        addGambar_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProductActivity.this);
+                builder.setTitle("Tambah Gambar")
+                        .setItems(new CharSequence[]{"Galeri", "Kamera"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                boolean active = false;
+                                switch (which) {
+                                    case 0:
+                                        // Memilih gambar dari galeri
+                                        Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                        startActivityForResult(intentGallery, REQUEST_GALLERY);
+                                        break;
+                                    case 1:
+                                        // Mengambil foto dari kamera
+                                        if (ContextCompat.checkSelfPermission(UpdateProductActivity.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                                            Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            startActivityForResult(intentCamera, REQUEST_CAMERA);
+                                        } else {
+                                            ActivityCompat.requestPermissions(UpdateProductActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                                        }
+                                        break;
+                                }
+                            }
+                        })
+                        .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.create().show();
+            }
+        });
+
+        product_imageView = findViewById(R.id.product_imageView);
+        produkimageDraable = product_imageView.getDrawable();
         product_title_textView = findViewById(R.id.product_title_textView);
         delete_button = findViewById(R.id.delete_button);
         backTextView = findViewById(R.id.backTextView);
@@ -77,6 +138,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         });
 
         getAndSetIntentDatea();
+        System.out.println("image_bitmap = " + image_bitmap);
 
         product_title_textView.setText(title);
 
@@ -89,12 +151,20 @@ public class UpdateProductActivity extends AppCompatActivity {
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(produkimageDraable);
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) produkimageDraable;
+                System.out.println(bitmapDrawable);
+                Bitmap bitmap = bitmapDrawable.getBitmap(); // Ganti imagePath dengan path dari gambar
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateProductActivity.this);
                 title = title_input.getText().toString().trim();
                 price = price_input.getText().toString().trim();
                 stock = stock_input.getText().toString().trim();
                 code = code_input.getText().toString().trim();
-                myDB.updateData(id,title,Integer.valueOf(price),Integer.valueOf(stock),code, Integer.valueOf(selectedOptionId));
+                myDB.updateData(id,title,Integer.valueOf(price),Integer.valueOf(stock),code, Integer.valueOf(selectedOptionId),byteArray);
                 Intent intent = new Intent(UpdateProductActivity.this, ProdukListActivity.class);
                 startActivity(intent);
                 finish();
@@ -122,7 +192,8 @@ public class UpdateProductActivity extends AppCompatActivity {
                 getIntent().hasExtra("price") &&
                 getIntent().hasExtra("stock") &&
                 getIntent().hasExtra("code") &&
-                getIntent().hasExtra("kategori")){
+                getIntent().hasExtra("kategori") &&
+                getIntent().hasExtra("images")){
 
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
@@ -130,11 +201,15 @@ public class UpdateProductActivity extends AppCompatActivity {
             stock = getIntent().getStringExtra("stock");
             code = getIntent().getStringExtra("code");
             kategori = getIntent().getStringExtra("kategori");
+            image_bitmap = getIntent().getByteArrayExtra("images"); //kirim berupa byte array
+
+            Bitmap bmp = BitmapFactory.decodeByteArray(image_bitmap, 0, image_bitmap.length); //dconvert byte array jadi bitmap lagi
 
             title_input.setText(title);
             price_input.setText(price);
             stock_input.setText(stock);
             code_input.setText(code);
+            product_imageView.setImageBitmap(bmp);
         }else{
             Toast.makeText(this, "Tidak ada data.", Toast.LENGTH_SHORT).show();
         }
@@ -167,24 +242,6 @@ public class UpdateProductActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
-//        builder.setTitle("Hapus " + title + " ?");
-//        builder.setMessage("Anda yakin menghapus " + title + " ?");
-//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateProductActivity.this);
-//                myDB.deleteOneRow(id);
-//                finish();
-//            }
-//        });
-//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
-//        builder.show();
     }
 
     @Override
@@ -192,5 +249,25 @@ public class UpdateProductActivity extends AppCompatActivity {
         Intent intent = new Intent(UpdateProductActivity.this, ProdukListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK && data != null) {
+            // Memilih gambar dari galeri
+            Uri imageUri = data.getData();
+            product_imageView.setImageURI(imageUri);
+            produkimageDraable = product_imageView.getDrawable();
+            // Lakukan sesuatu dengan imageUri, seperti menampilkan di ImageView
+        } else if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK && data != null) {
+            // Mengambil foto dari kamera
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            product_imageView.setImageBitmap(imageBitmap);
+            produkimageDraable = product_imageView.getDrawable();
+            // Lakukan sesuatu dengan imageBitmap
+        }
     }
 }

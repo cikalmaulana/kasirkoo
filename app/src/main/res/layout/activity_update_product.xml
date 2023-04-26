@@ -48,7 +48,7 @@
                 android:src="@drawable/boxcolour" />
 
             <Button
-                android:id="@+id/update_image_button"
+                android:id="@+id/addGambar_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

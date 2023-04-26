@@ -20,6 +20,7 @@ import com.example.kasirkoo.Image;
 import com.example.kasirkoo.R;
 import com.example.kasirkoo.UpdateProductActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.Blob;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -71,12 +72,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, UpdateProductActivity.class);
+                Bitmap bmp = product_image.get(position);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                bmp.recycle();
+
                 intent.putExtra("id",String.valueOf(product_id.get(position)));
                 intent.putExtra("title",String.valueOf(product_title.get(position)));
                 intent.putExtra("price",String.valueOf(product_price.get(position)));
                 intent.putExtra("stock",String.valueOf(product_stock.get(position)));
                 intent.putExtra("code",String.valueOf(product_code.get(position)));
                 intent.putExtra("kategori",String.valueOf(product_kategori.get(position)));
+                intent.putExtra("images",byteArray);
                 activity.startActivityForResult(intent,1);
             }
         });

@@ -87,7 +87,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void updateData(String row_id, String title, int price, int stock, String code, int idkat){
+    public void updateData(String row_id, String title, int price, int stock, String code, int idkat, byte[]byteArray){
         System.out.println(title + " " + price + " " + stock + " "  +code);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -96,6 +96,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_STOCK, stock);
         cv.put(COLUMN_CODE, code);
         cv.put(COLUMN_IDKATEGORI, idkat);
+        cv.put(COLUMN_GAMBAR, byteArray);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1) Toast.makeText(context, "Gagal update", Toast.LENGTH_LONG).show();
