@@ -66,6 +66,7 @@ public class AddActivity extends AppCompatActivity {
         backTextView = findViewById(R.id.backTextView);
         addGambar_btn = findViewById(R.id.addGambar_btn);
         preview_imageView = findViewById(R.id.preview_imageView);
+        produkimageDraable = preview_imageView.getDrawable();
         addGambar_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,19 +150,35 @@ public class AddActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
 
-                MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
-                myDB.addProduk(
-                        title_input.getText().toString().trim(),
-                        Integer.valueOf(price_input.getText().toString().trim()),
-                        Integer.valueOf(stock_input.getText().toString().trim()),
-                        code_input.getText().toString().trim(),
-                        Integer.valueOf(selectedOptionId),
-                        byteArray
-                );
+                System.out.println("TITEL INPUT = " + title_input.getText().toString());
+                
+                if(title_input.getText().length() <= 0){
+                    Toast.makeText(AddActivity.this, "Masukan nama produk!", Toast.LENGTH_SHORT).show();
+                }
+                else if(price_input.getText().length() <= 0){
+                    Toast.makeText(AddActivity.this, "Masukan harga produk!", Toast.LENGTH_SHORT).show();
+                }
+                else if(stock_input.getText().length() <= 0){
+                    Toast.makeText(AddActivity.this, "Masukan stok produk atau isi dengan 0", Toast.LENGTH_SHORT).show();
+                }
+                else if(code_input.getText().length() <= 0){
+                    Toast.makeText(AddActivity.this, "Masukan kode produk atau isi dengan -", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
+                    myDB.addProduk(
+                            title_input.getText().toString().trim(),
+                            Integer.valueOf(price_input.getText().toString().trim()),
+                            Integer.valueOf(stock_input.getText().toString().trim()),
+                            code_input.getText().toString().trim(),
+                            Integer.valueOf(selectedOptionId),
+                            byteArray
+                    );
 
-                Intent intent = new Intent(AddActivity.this, ProdukListActivity.class);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(AddActivity.this, ProdukListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         backTextView.setOnClickListener(new View.OnClickListener() {
