@@ -68,7 +68,47 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor readAllData(){
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_TITLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            String query2 =  "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                    " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT, " +
+                    COLUMN_PRICE + " INTEGER, " +
+                    COLUMN_STOCK + " INTEGER, " +
+                    COLUMN_CODE + " TEXT, " +
+                    COLUMN_IDKATEGORI + " INTEGER, " +
+                    COLUMN_GAMBAR + " BLOB); ";
+            db.execSQL(query2);
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
+    }
+
+    public Cursor getJumlahProdukAll(){
+        String query = "SELECT count(" + COLUMN_ID + ") FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            String query2 =  "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                    " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT, " +
+                    COLUMN_PRICE + " INTEGER, " +
+                    COLUMN_STOCK + " INTEGER, " +
+                    COLUMN_CODE + " TEXT, " +
+                    COLUMN_IDKATEGORI + " INTEGER, " +
+                    COLUMN_GAMBAR + " BLOB); ";
+            db.execSQL(query2);
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
+    }
+
+    public Cursor getJumlahStokAll(){
+        String query = "SELECT sum(" + COLUMN_STOCK + ") FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -97,6 +137,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_CODE, code);
         cv.put(COLUMN_IDKATEGORI, idkat);
         cv.put(COLUMN_GAMBAR, byteArray);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if(result == -1) Toast.makeText(context, "Gagal update", Toast.LENGTH_LONG).show();
+        else Toast.makeText(context, "Update sukses", Toast.LENGTH_LONG).show();
+    }
+
+    public void updateStok(String row_id, int stockAwal, int stokBaru){
+        System.out.println("Stok awal = " + stockAwal + " Stok baru = " + stokBaru);
+        int stokAkhir = stockAwal + stokBaru;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_STOCK, stokAkhir);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1) Toast.makeText(context, "Gagal update", Toast.LENGTH_LONG).show();

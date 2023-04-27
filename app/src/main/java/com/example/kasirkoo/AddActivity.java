@@ -39,11 +39,11 @@ import java.util.ArrayList;
 public class AddActivity extends AppCompatActivity {
 
     EditText title_input, price_input, stock_input, code_input;
-    Button add_button,addGambar_btn;
+    Button add_button;
     TextView backTextView;
     String selectedOption,selectedOptionId;
     KategoriDatabaseHelper kategoriDB;
-    ImageView preview_imageView;
+    ImageView preview_imageView, addGambar_btn;
 
     Drawable produkimageDraable;
     private static final int REQUEST_GALLERY = 1;
@@ -67,7 +67,7 @@ public class AddActivity extends AppCompatActivity {
         addGambar_btn = findViewById(R.id.addGambar_btn);
         preview_imageView = findViewById(R.id.preview_imageView);
         produkimageDraable = preview_imageView.getDrawable();
-        addGambar_btn.setOnClickListener(new View.OnClickListener() {
+        preview_imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
@@ -108,7 +108,6 @@ public class AddActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
-
 
         kategoriDB = new KategoriDatabaseHelper(AddActivity.this);
         Cursor cursor = kategoriDB.readAllData();

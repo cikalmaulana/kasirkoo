@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Kasirkoo"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateStokActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProdukStokActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddKategoriActivity"
             android:exported="false" />
         <activity

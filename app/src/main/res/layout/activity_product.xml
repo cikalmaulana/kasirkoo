@@ -122,4 +122,48 @@
 
         </LinearLayout>
     </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_stock_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/imageViewStock"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:src="@drawable/stoklist" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageViewStock"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:id="@+id/textView1Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView"
+                android:text="Manajemen Stok"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jumlah_stok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_below="@+id/textView1"
+                android:text="200 stok produk" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -45,11 +45,11 @@ public class UpdateProductActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 1;
 
     EditText title_input, price_input, stock_input, code_input;
-    Button update_button,delete_button,addGambar_btn;
+    Button update_button,delete_button;
     String id, title, price, stock, code, kategori, selectedOption, selectedOptionId;
     byte[] image_bitmap;
     TextView product_title_textView,backTextView;
-    ImageView product_imageView;
+    ImageView product_imageView,addGambar_btn;
     Drawable produkimageDraable;
 
     @Override
@@ -58,49 +58,10 @@ public class UpdateProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_product);
 
         ArrayList<String> inputOptions = new ArrayList<>();
-
-
         title_input = findViewById(R.id.title_input2);
         price_input = findViewById(R.id.price_input2);
         stock_input = findViewById(R.id.stock_input2);
         code_input = findViewById(R.id.code_input2);
-        addGambar_btn = findViewById(R.id.addGambar_btn);
-        addGambar_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProductActivity.this);
-                builder.setTitle("Tambah Gambar")
-                        .setItems(new CharSequence[]{"Galeri", "Kamera"}, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                boolean active = false;
-                                switch (which) {
-                                    case 0:
-                                        // Memilih gambar dari galeri
-                                        Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                        startActivityForResult(intentGallery, REQUEST_GALLERY);
-                                        break;
-                                    case 1:
-                                        // Mengambil foto dari kamera
-                                        if (ContextCompat.checkSelfPermission(UpdateProductActivity.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                                            Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                            startActivityForResult(intentCamera, REQUEST_CAMERA);
-                                        } else {
-                                            ActivityCompat.requestPermissions(UpdateProductActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                                        }
-                                        break;
-                                }
-                            }
-                        })
-                        .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder.create().show();
-            }
-        });
 
         product_imageView = findViewById(R.id.product_imageView);
         produkimageDraable = product_imageView.getDrawable();
@@ -127,8 +88,6 @@ public class UpdateProductActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedOption = parent.getItemAtPosition(position).toString();
                 selectedOptionId = String.valueOf(position + 1);
-                System.out.println("VALUE = " + selectedOption);
-                System.out.println("ID = " + selectedOptionId);
             }
 
             @Override
@@ -184,6 +143,43 @@ public class UpdateProductActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        product_imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProductActivity.this);
+                builder.setTitle("Tambah Gambar")
+                        .setItems(new CharSequence[]{"Galeri", "Kamera"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                boolean active = false;
+                                switch (which) {
+                                    case 0:
+                                        // Memilih gambar dari galeri
+                                        Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                        startActivityForResult(intentGallery, REQUEST_GALLERY);
+                                        break;
+                                    case 1:
+                                        // Mengambil foto dari kamera
+                                        if (ContextCompat.checkSelfPermission(UpdateProductActivity.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                                            Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            startActivityForResult(intentCamera, REQUEST_CAMERA);
+                                        } else {
+                                            ActivityCompat.requestPermissions(UpdateProductActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                                        }
+                                        break;
+                                }
+                            }
+                        })
+                        .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.create().show();
+            }
+        });
     }
 
     void getAndSetIntentDatea(){
@@ -210,6 +206,7 @@ public class UpdateProductActivity extends AppCompatActivity {
             stock_input.setText(stock);
             code_input.setText(code);
             product_imageView.setImageBitmap(bmp);
+            produkimageDraable = product_imageView.getDrawable();
         }else{
             Toast.makeText(this, "Tidak ada data.", Toast.LENGTH_SHORT).show();
         }

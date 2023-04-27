@@ -67,6 +67,21 @@ public class KategoriDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor getJumlahKategori(){
+        String query = "SELECT count(" + COLUMN_ID + ") FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            String query2 =  "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                    " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT); ";
+            db.execSQL(query2);
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
+    }
+
     public Cursor readAllDataWhere(String id){
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + id ;
         SQLiteDatabase db = this.getReadableDatabase();
