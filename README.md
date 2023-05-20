@@ -26,12 +26,12 @@ Usage
 4. Enjoy the benefits of a reliable and efficient point-of-sale system.
 
 License
-Kasirkoo is provided under the MIT License, which permits non-commercial use and distribution of the software. Selling or commercial use of the application is strictly prohibited.
+* Kasirkoo is provided under the MIT License, which permits non-commercial use and distribution of the software. Selling or commercial use of the application is strictly prohibited.
 
 Contribution
-Contributions to the Kasirkoo repository are currently not accepted. However, you are encouraged to fork the project and customize it for your specific needs.
+* Contributions to the Kasirkoo repository are currently not accepted. However, you are encouraged to fork the project and customize it for your specific needs. Or contact me to collaborate on this repository.
 
 Support
-If you encounter any issues or have any questions or suggestions, please create an issue in the GitHub repository.
+* If you encounter any issues or have any questions or suggestions, please create an issue in the GitHub repository.
 
 Thank you for your interest in Kasirkoo! 
