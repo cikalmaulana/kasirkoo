@@ -10,6 +10,50 @@
     <string name="pelanggan">Pelanggan</string>
     <string name="pegawai">Pegawai</string>
     <string name="bantuan">Bantuan</string>
+
+    <string name="signin">Masuk</string>
+    <string name="signup">Register</string>
+
+<!--    Button -->
+    <string name="btnUpdate">Update</string>
+    <string name="btnDeletePorduct">Hapus Produk</string>
+
+<!--    String -->
+    <string name="updateStockString">Masukan perubahan stok. Input negatif bila ingin mengurangi stok. Misal -100.</string>
+    <string name="yourStore">Toko Kamu</string>
+    <string name="codeText">Kode : </string>
+    <string name="categoryText">Kategori : </string>
+    <string name="stockText">Stok : </string>
+
+<!--    Transaksi -->
+    <string name="transactionTitle">Transaksi Baru</string>
+    <string name="tambah">Tambah</string>
+    <string name="checkout">Checkout</string>
+    <string name="findProduct">Cari Produk</string>
+
+<!--    Produk -->
+    <string name="back">Kembali</string>
+    <string name="productName">Nama Produk</string>
+    <string name="productPrice">Harga</string>
+    <string name="productStock">Stok</string>
+    <string name="productCode">Kode Produk</string>
+    <string name="productCategory">Kategori</string>
+    <string name="addProduct">Tambah Product</string>
+    <string name="thereIsNoProduct">Tidak ada produk</string>
+
+<!--    Manajemen Produk-->
+    <string name="productManagement">Manajemen Product</string>
+    <string name="productListTitle">List Produk</string>
+    <string name="categoryListTitle">List Kategori</string>
+    <string name="stockManagement">Manajemen Stok</string>
+
+<!--    Kategori -->
+    <string name="categoryName">Nama Kategori</string>
+    <string name="addCategory">Tambah Kategori</string>
+    <string name="category">Kategori</string>
+    <string name="thereIsNoCategory">Tidak ada kategori</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_product">ProductActivity</string>

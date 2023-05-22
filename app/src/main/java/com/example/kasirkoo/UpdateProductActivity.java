@@ -51,6 +51,7 @@ public class UpdateProductActivity extends AppCompatActivity {
     TextView product_title_textView,backTextView;
     ImageView product_imageView,addGambar_btn;
     Drawable produkimageDraable;
+    int quality = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +116,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                 System.out.println(bitmapDrawable);
                 Bitmap bitmap = bitmapDrawable.getBitmap(); // Ganti imagePath dengan path dari gambar
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
                 byte[] byteArray = stream.toByteArray();
 
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateProductActivity.this);
@@ -255,6 +256,24 @@ public class UpdateProductActivity extends AppCompatActivity {
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK && data != null) {
             // Memilih gambar dari galeri
             Uri imageUri = data.getData();
+            int size = getImageSize(imageUri);
+            if(size > 3000){
+                Toast.makeText(this, "File terlalu besar! Maksimal ukuran 3MB", Toast.LENGTH_LONG).show();
+            }else{
+                if(size > 2000 && size <= 3000){
+                    quality = 3;
+                }else if(size > 1000 && size <= 2000){
+                    quality = 4;
+                }else if(size > 500 && size <= 1000){
+                    quality = 8;
+                }else if(size > 100 && size <= 500){
+                    quality = 18;
+                }else{
+                    quality = 100;
+                }
+                product_imageView.setImageURI(imageUri);
+                produkimageDraable = product_imageView.getDrawable();
+            }
             product_imageView.setImageURI(imageUri);
             produkimageDraable = product_imageView.getDrawable();
             // Lakukan sesuatu dengan imageUri, seperti menampilkan di ImageView
@@ -266,5 +285,15 @@ public class UpdateProductActivity extends AppCompatActivity {
             produkimageDraable = product_imageView.getDrawable();
             // Lakukan sesuatu dengan imageBitmap
         }
+    }
+
+    public int getImageSize(Uri uri) {
+        String[] filePathColumn = {MediaStore.Images.Media.SIZE};
+        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int sizeIndex = cursor.getColumnIndex(filePathColumn[0]);
+        int size = cursor.getInt(sizeIndex) / 1024; // in KB
+        cursor.close();
+        return size;
     }
 }

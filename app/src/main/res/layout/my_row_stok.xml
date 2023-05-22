@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kode : " />
+                    android:text="@string/codeText" />
 
                 <TextView
                     android:id="@+id/product_code_txt"
@@ -89,13 +89,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stok : " />
+                    android:text="@string/stockText" />
 
                 <TextView
                     android:id="@+id/product_stock_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Kategori" />
+                    android:text="Product Stock" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

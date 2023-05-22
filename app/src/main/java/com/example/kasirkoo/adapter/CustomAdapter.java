@@ -33,6 +33,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public ArrayList<Bitmap> product_image;//product image dari sqlite isinya blob
     Activity activity;
     int index = 0;
+    int quality;
 
     public CustomAdapter(Activity activity, Context context, ArrayList product_id, ArrayList product_title, ArrayList product_price, ArrayList product_stock, ArrayList product_code, ArrayList product_kategori, ArrayList<Bitmap> product_image){ //product_image berupa bitmap yang disimpen ke array list
         this.activity = activity;
@@ -74,7 +75,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 Intent intent = new Intent(context, UpdateProductActivity.class);
                 Bitmap bmp = product_image.get(position);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bmp.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                 byte[] byteArray = stream.toByteArray();
                 bmp.recycle();
 

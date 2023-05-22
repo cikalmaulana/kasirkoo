@@ -5,11 +5,11 @@
     android:id="@+id/main"
     app:startDestination="@id/menuHome">
 
-    <fragment
+    <activity
         android:id="@+id/menuTransaksi"
-        android:name="com.example.kasirkoo.TransaksiFragment"
+        android:name="com.example.kasirkoo.TransaksiActivity"
         android:label="Transaksi"
-        tools:layout="@layout/fragment_transaksi" />
+        tools:layout="@layout/activity_transaksi" />
 
     <fragment
         android:id="@+id/menuHome"

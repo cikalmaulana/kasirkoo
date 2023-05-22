@@ -60,7 +60,7 @@ public class UpdateStokActivity extends AppCompatActivity {
         stock_input = findViewById(R.id.stock_input2);
 
         product_imageView = findViewById(R.id.product_imageView);
-        product_code_textView = findViewById(R.id.product_code_textView);
+//        product_code_textView = findViewById(R.id.product_code_textView);
         produkimageDraable = product_imageView.getDrawable();
         product_title_textView = findViewById(R.id.product_title_textView);
         backTextView = findViewById(R.id.backTextView);
@@ -100,10 +100,14 @@ public class UpdateStokActivity extends AppCompatActivity {
 
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateStokActivity.this);
                 String stokBaru = stock_input.getText().toString().trim();
-                myDB.updateStok(id,Integer.valueOf(stokAwal),Integer.valueOf(stokBaru));
-                Intent intent = new Intent(UpdateStokActivity.this, ProdukStokActivity.class);
-                startActivity(intent);
-                finish();
+                if(Integer.valueOf(stokAwal)+Integer.valueOf(stokBaru) <0){
+                    Toast.makeText(UpdateStokActivity.this, "Stok tidak boleh kurang dari 0!", Toast.LENGTH_SHORT).show();
+                }else{
+                    myDB.updateStok(id,Integer.valueOf(stokAwal),Integer.valueOf(stokBaru));
+                    Intent intent = new Intent(UpdateStokActivity.this, ProdukStokActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         backTextView.setOnClickListener(new View.OnClickListener() {

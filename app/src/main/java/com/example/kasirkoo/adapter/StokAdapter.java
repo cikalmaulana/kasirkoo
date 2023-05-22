@@ -64,7 +64,7 @@ public class StokAdapter extends RecyclerView.Adapter<StokAdapter.MyViewHolder>{
                 Intent intent = new Intent(context, UpdateStokActivity.class);
                 Bitmap bmp = product_image.get(position);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bmp.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                 byte[] byteArray = stream.toByteArray();
                 bmp.recycle();
 

@@ -50,6 +50,7 @@ public class AddActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA = 2;
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private boolean cameraOptionSelected = false;
+    int quality = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +147,7 @@ public class AddActivity extends AppCompatActivity {
                 System.out.println(bitmapDrawable);
                 Bitmap bitmap = bitmapDrawable.getBitmap(); // Ganti imagePath dengan path dari gambar
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
                 byte[] byteArray = stream.toByteArray();
 
                 System.out.println("TITEL INPUT = " + title_input.getText().toString());
@@ -204,8 +205,28 @@ public class AddActivity extends AppCompatActivity {
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK && data != null) {
             // Memilih gambar dari galeri
             Uri imageUri = data.getData();
-            preview_imageView.setImageURI(imageUri);
-            produkimageDraable = preview_imageView.getDrawable();
+            int size = getImageSize(imageUri);
+            if(size > 3000){
+                Toast.makeText(this, "File terlalu besar! Maksimal ukuran 3MB", Toast.LENGTH_LONG).show();
+            }else{
+                if(size > 2000 && size <= 3000){
+                    quality = 3;
+                }else if(size > 1000 && size <= 2000){
+                    quality = 4;
+                }else if(size > 500 && size <= 1000){
+                    quality = 8;
+                }else if(size > 100 && size <= 500){
+                    quality = 18;
+                }else{
+                    quality = 100;
+                }
+                preview_imageView.setImageURI(imageUri);
+                produkimageDraable = preview_imageView.getDrawable();
+            }
+
+            System.out.println("SIZE IMAGE = " + getImageSize(imageUri));
+
+
             // Lakukan sesuatu dengan imageUri, seperti menampilkan di ImageView
         } else if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK && data != null) {
             // Mengambil foto dari kamera
@@ -215,5 +236,15 @@ public class AddActivity extends AppCompatActivity {
             produkimageDraable = preview_imageView.getDrawable();
             // Lakukan sesuatu dengan imageBitmap
         }
+    }
+
+    public int getImageSize(Uri uri) {
+        String[] filePathColumn = {MediaStore.Images.Media.SIZE};
+        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int sizeIndex = cursor.getColumnIndex(filePathColumn[0]);
+        int size = cursor.getInt(sizeIndex) / 1024; // in KB
+        cursor.close();
+        return size;
     }
 }

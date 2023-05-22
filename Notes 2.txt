@@ -1,0 +1,13 @@
+KERANJANG
+
+ID | nama_produk | kode_produk | total_produk | harga_produk | 
+
+1  | Sampo 	     | SAMPO1	 | 1		    | 5000 		 | //Contoh yang auto input
+2  | Deterjen    | 		 | 1		    | 6000		 | //Contoh yang manual input
+
+Problem :
+Jadi pas abis klik tombol add, muncul popup yang suruh ngisi nama produk, sama total produk.
+Dari popup itu ada button add, baru dari button add yg ini ke myDB.addBelanjaan
+
+ada method addBelanjaan : fungsinya untuk nambah namaproduk, kodeproduk, totalproduk, sama hargaproduk di table keranjang
+jadi method addTotalBelanja dihilangkan, ganti sama addBelanjaan

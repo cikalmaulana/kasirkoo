@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:text="Toko Kamu"
+        android:text="@string/yourStore"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"

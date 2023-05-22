@@ -17,7 +17,7 @@
             android:id="@+id/backTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kembali"
+            android:text="@string/back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,8 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@drawable/flatbox"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:largeHeap="true"/>
 
             <ImageView
                 android:id="@+id/addGambar_btn"
@@ -61,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama produk"
+            android:text="@string/productName"
             app:layout_constraintBottom_toTopOf="@+id/title_input"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="10dp"
@@ -77,7 +78,7 @@
             android:drawablePadding="10dp"
             android:layout_marginTop="55dp"
             android:ems="10"
-            android:hint="Nama Produk"
+            android:hint="@string/productName"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:textSize="16sp"
@@ -89,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Harga"
+            android:text="@string/productPrice"
             android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/price_input"
@@ -101,7 +102,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="43dp"
             android:ems="10"
-            android:hint="Harga"
+            android:hint="@string/productPrice"
             android:inputType="number"
             android:background="@drawable/edit_background"
             android:drawableLeft="@drawable/harga_logo"
@@ -115,7 +116,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stok"
+            android:text="@string/productStock"
             android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/stock_input"
@@ -127,7 +128,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="43dp"
             android:ems="10"
-            android:hint="Stok"
+            android:hint="@string/productStock"
             android:inputType="number"
             android:background="@drawable/edit_background"
             android:drawableLeft="@drawable/stok_logo"
@@ -141,7 +142,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kode Produk"
+            android:text="@string/productCode"
             android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/code_input"
@@ -153,7 +154,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="43dp"
             android:ems="10"
-            android:hint="Kode Produk"
+            android:hint="@string/productCode"
             android:inputType="text"
             android:background="@drawable/edit_background"
             android:drawableLeft="@drawable/code_logo"
@@ -167,7 +168,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kategori"
+            android:text="@string/productCategory"
             android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/spinner_input"
@@ -187,7 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:text="Tambah Produk"
+            android:text="@string/addProduct"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="@color/white"
